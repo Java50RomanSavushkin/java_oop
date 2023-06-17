@@ -39,5 +39,4 @@ public class Arrays {
 		array[i] = array[j];
 		array[j] = tmp;
 	}
-
 }

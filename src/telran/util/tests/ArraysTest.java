@@ -58,5 +58,4 @@ public class ArraysTest {
 	    bubbleSort(array,new EvenOddComparator());
 	    assertArrayEquals(expected, array);
 	  }
-
 }
