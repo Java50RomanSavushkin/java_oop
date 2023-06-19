@@ -4,9 +4,6 @@ import java.util.function.BinaryOperator;
 
 public class Calculator {
 	public static double calculate(CalcData cd) {
-//		double num1 = cd.op1;
-//		double num2 = cd.op2;
-//		char oper = cd.operation;
 
 		int maxAsciiCode = Math.max(Math.max('+', '-'), Math.max('/', '*'));
 		DoubleBinaryOperator[] operations = new DoubleBinaryOperator[maxAsciiCode + 1];
@@ -21,6 +18,6 @@ public class Calculator {
 	}
 
 	interface DoubleBinaryOperator extends BinaryOperator<Double> {
-		
+
 	}
 }
