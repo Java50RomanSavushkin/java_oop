@@ -1,6 +1,7 @@
 package telran.numbers.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import java.util.function.BinaryOperator;
 
@@ -13,27 +14,33 @@ class CalculatorTest {
 
 	@Test
 	void test() {
-		BinaryOperator<Double> bo = (a,b) -> a + b;
-		assertEquals(30,bo.apply(10.0, 20.0));
-		DoubleBinaryOperator[] operators = {
-				(a, b) -> a + b,
-				(a, b) -> a - b,
-				(a, b) -> a * b,
-				(a, b) -> a / b
-		};
-		double[] results = {30, 10, 200, 2};
+		BinaryOperator<Double> bo = (a, b) -> a + b;
+		assertEquals(30, bo.apply(10.0, 20.0));
+		DoubleBinaryOperator[] operators = { 
+				(a, b) -> a + b, 
+				(a, b) -> a - b, 
+				(a, b) -> a * b, 
+				(a, b) -> a / b 
+				};
+		double[] results = { 30, 10, 200, 2 };
 		double op1 = 20;
 		double op2 = 10;
-		for(int i = 0; i < operators.length; i++) {
+		for (int i = 0; i < operators.length; i++) {
 			assertEquals(results[i], operators[i].apply(op1, op2));
 		}
 	}
-@Test
-void calculateTest() {
-	assertEquals(20, Calculator.calculate(new CalcData(40, 20, '-')));
-}
+
+	@Test
+	void calculateTest() {
+		assertEquals(20, Calculator.calculate(new CalcData(40, 20, '-')));
+		assertEquals(0.5, Calculator.calculate(new CalcData(1, 2, '/')));
+		assertEquals(1, Calculator.calculate(new CalcData(0.5, 2, '*')));
+		assertEquals(0.74, Calculator.calculate(new CalcData(0.5, 0.24, '+')));
+		assertThrowsExactly(UnsupportedOperationException.class,() -> Calculator.calculate(new CalcData(0.5, 0.24, '?')));
+		assertThrowsExactly(ArithmeticException.class, () -> Calculator.calculate(new CalcData(10, 0, '/')));
+	}
 }
 
 interface DoubleBinaryOperator extends BinaryOperator<Double> {
-	
+
 }
