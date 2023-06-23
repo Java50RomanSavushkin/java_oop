@@ -4,6 +4,10 @@ public class BallBrokenFloor {
 	private int floor;
 	private int nFloors;
 
+	public int getnFloors() {
+		return nFloors;
+	}
+
 	public int getFloor() {
 		// this method is only for testing
 		return floor;

@@ -34,31 +34,27 @@ class ExceptionsTest {
 		return number * 2;
 	}
 
-	int N_FLOORS = 200;
- 
 	@Test
 	void ballBrokenFloorTest() {
-		BallBrokenFloor bbf = new BallBrokenFloor(N_FLOORS);
-		assertEquals(bbf.getFloor(), getMinFloor(bbf));
+		for (int i = 0; i < 1000; i++) {
+			BallBrokenFloor bbf = new BallBrokenFloor((int) (1 + Math.random() * 100_000));
+			assertEquals(bbf.getFloor(), getMinFloor(bbf));
+		}
 	}
 
 	private int getMinFloor(BallBrokenFloor bbf) {
-		int minFloor = 1;
-		int maxFloor = N_FLOORS;
-		System.out.println("safe floor " + bbf.getFloor());
-		try {
-			while (minFloor < maxFloor) {
-				int middleFloor = minFloor + (maxFloor - minFloor) / 2;
-				try {
-					bbf.broken(middleFloor);
-					minFloor = middleFloor + 1;
-				} catch (Exception e) {
-					maxFloor = middleFloor;
-					System.out.println("checked floor " + maxFloor);
-				}
+		int left = 1;
+		int right = bbf.getnFloors();
+		int middle = right / 2;
+		while (left <= right) {
+			try {
+				bbf.broken(middle);
+				left = middle + 1;
+			} catch (Exception e) {
+				right = middle - 1;
 			}
-		} catch (Exception e) {
+			middle = (left + right) / 2;
 		}
-		return maxFloor;
+		return left;
 	}
 }
