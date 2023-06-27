@@ -17,7 +17,7 @@ class RangePredicateTest {
 	RangePredicate range;
 	Predicate<Integer> predicateOdd = (num -> num % 2 != 0);
 	Predicate<Integer> predicateEven = (num -> num % 2 != 0);
-
+ 
 	@BeforeEach
 	void setUp() {
 		range = new RangePredicate(1, 5);
@@ -50,7 +50,6 @@ class RangePredicateTest {
 		int[] expected = { 1, 3 };
 		range.setPredicate(predicateOdd);
 		assertArrayEquals(expected, range.toArray());
-
 	}
 
 	@Test
@@ -58,7 +57,6 @@ class RangePredicateTest {
 		int[] expected = { 2, 4 };
 		range.setPredicate(predicateEven);
 		assertArrayEquals(expected, range.toArray());
-
 	}
 
 }

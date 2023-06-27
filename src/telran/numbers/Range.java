@@ -14,17 +14,17 @@ public class Range implements Iterable<Integer> {
 		public boolean hasNext() {
 			return current < maxExclusive;
 		}
- 
+
 		@Override
 		public Integer next() {
 			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
-			int res = current++;
-			return res;
+			// int res = current++;
+			return current++;
 		}
 	}
- 
+
 	public Range(int min, int max) {
 		if (min >= max) {
 			throw new IllegalArgumentException("min must be less than max");
@@ -45,7 +45,7 @@ public class Range implements Iterable<Integer> {
 		}
 		return res;
 	}
- 
+
 	@Override
 	public Iterator<Integer> iterator() {
 		return new RangeIterator();
