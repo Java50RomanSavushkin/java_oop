@@ -58,5 +58,5 @@ class RangePredicateTest {
 		range.setPredicate(predicateEven);
 		assertArrayEquals(expected, range.toArray());
 	}
-
+ 
 }

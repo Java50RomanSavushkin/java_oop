@@ -34,7 +34,7 @@ public class RangePredicate implements Iterable<Integer> {
 		}
 		return Arrays.copyOf(res, index);
 	}
-
+ 
 	private class RangePredicateIterator implements Iterator<Integer> {
 		int current;
 		Predicate<Integer> innerPredicate;
