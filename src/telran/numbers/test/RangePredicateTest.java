@@ -1,6 +1,6 @@
 package telran.numbers.test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,49 +14,46 @@ import org.junit.jupiter.api.Test;
 import telran.numbers.RangePredicate;
 
 class RangePredicateTest {
-	RangePredicate range;
-	Predicate<Integer> predicateOdd = (num -> num % 2 != 0);
-	Predicate<Integer> predicateEven = (num -> num % 2 != 0);
+ RangePredicate range ;
+ Predicate<Integer> predicateOdd = num -> num % 2 != 0;
+ Predicate<Integer> predicateEven = num -> num % 2 == 0;
+ @BeforeEach
+ void setUp() {
+	 range = new RangePredicate(1, 5);
+ }
  
-	@BeforeEach
-	void setUp() {
-		range = new RangePredicate(1, 5);
-	}
-
 	@Test
 	void fullRangeTest() {
-		int[] expected = { 1, 2, 3, 4 };
+		int[] expected = {1, 2, 3, 4};
 		assertArrayEquals(expected, range.toArray());
 	}
-
 	@Test
 	void iteratorTest() {
 		range.setPredicate(predicateOdd);
 		Iterator<Integer> itOdd = range.iterator();
 		range.setPredicate(predicateEven);
 		Iterator<Integer> itEven = range.iterator();
-		while (itOdd.hasNext()) {
+		while(itOdd.hasNext()) {
 			assertTrue(itOdd.next() % 2 != 0);
 		}
-		while (itEven.hasNext()) {
+		while(itEven.hasNext()) {
 			assertTrue(itEven.next() % 2 == 0);
 		}
 		assertThrowsExactly(NoSuchElementException.class, () -> itOdd.next());
 		assertThrowsExactly(NoSuchElementException.class, () -> itEven.next());
+		
 	}
-
 	@Test
 	void oddToArrayTest() {
-		int[] expected = { 1, 3 };
+		int [] expected = {1, 3};
 		range.setPredicate(predicateOdd);
 		assertArrayEquals(expected, range.toArray());
 	}
-
 	@Test
 	void evenToArrayTest() {
-		int[] expected = { 2, 4 };
+		int [] expected = {2, 4};
 		range.setPredicate(predicateEven);
 		assertArrayEquals(expected, range.toArray());
 	}
- 
+
 }
